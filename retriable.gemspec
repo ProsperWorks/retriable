@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "retriable/version"
 
 Gem::Specification.new do |s|
-  s.name        = "retriable"
+  s.name        = "legacy-retriable"
   s.version     = Retriable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jack Chu"]
