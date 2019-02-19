@@ -1,17 +1,17 @@
-require 'retriable'
+require 'legacy/retriable'
 require 'minitest/autorun'
 
 class RetriableTest < Minitest::Test
   def test_raise_no_block
     assert_raises LocalJumpError do
-      Retriable.retriable :on => StandardError
+      Legacy::Retriable.legacy_retriable :on => StandardError
     end
   end
 
   def test_without_arguments
     i = 0
 
-    Retriable.retriable do
+    Legacy::Retriable.legacy_retriable do
       i += 1
       raise StandardError.new
     end
@@ -22,7 +22,7 @@ class RetriableTest < Minitest::Test
   def test_with_one_exception_and_two_tries
     i = 0
 
-    Retriable.retriable :on => EOFError, :tries => 2 do
+    Legacy::Retriable.legacy_retriable :on => EOFError, :tries => 2 do
       i += 1
       raise EOFError.new
     end
@@ -39,7 +39,7 @@ class RetriableTest < Minitest::Test
       assert_equal i, tries
     end
 
-    Retriable.retriable :on => [EOFError, ArgumentError], :on_retry => on_retry, :tries => 5, :sleep => 0.2 do |h|
+    Legacy::Retriable.legacy_retriable :on => [EOFError, ArgumentError], :on_retry => on_retry, :tries => 5, :sleep => 0.2 do |h|
       i += 1
       raise ArgumentError.new
     end
@@ -56,7 +56,7 @@ class RetriableTest < Minitest::Test
       attempts
     end
 
-    Retriable.retriable :on => EOFError, :interval => sleeper do |h|
+    Legacy::Retriable.legacy_retriable :on => EOFError, :interval => sleeper do |h|
       raise EOFError.new
     end
     rescue
@@ -65,15 +65,15 @@ class RetriableTest < Minitest::Test
 
   def test_kernel_ext
     assert_raises NoMethodError do
-      retriable do
+      legacy_retriable do
         puts 'should raise NoMethodError'
       end
     end
 
-    require 'retriable/core_ext/kernel'
+    require 'legacy/retriable/core_ext/kernel'
     i = 0
 
-    retriable do
+    legacy_retriable do
       i += 1
       raise StandardError.new
     end

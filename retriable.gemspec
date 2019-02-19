@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "retriable/version"
+require "legacy/retriable/version"
 
 Gem::Specification.new do |s|
   s.name        = "legacy-retriable"
-  s.version     = Retriable::VERSION
+  s.version     = Legacy::Retriable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jack Chu"]
   s.email       = ["jack@jackchu.com"]

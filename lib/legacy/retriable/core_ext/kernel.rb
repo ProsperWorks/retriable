@@ -1,6 +1,6 @@
-require 'retriable'
+require 'legacy/retriable'
 
 module Kernel
-  include Retriable
-  private :retriable
+  include Legacy::Retriable
+  private :legacy_retriable
 end
